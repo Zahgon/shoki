@@ -4,7 +4,6 @@ import com.jnape.palatable.lambda.adt.coproduct.CoProduct2;
 import com.jnape.palatable.lambda.adt.hlist.Tuple2;
 import com.jnape.palatable.lambda.semigroup.Semigroup;
 import com.jnape.palatable.shoki.api.Natural.NonZero;
-
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.GTE.gte;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Into.into;
@@ -78,7 +77,7 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
      * @see MultiSet#inc(Object, Natural.NonZero)
      */
     default MultiSet<A> inc(A a) {
-        return inc(a, one());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -91,7 +90,7 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
      * @see MultiSet#dec(Object, Natural.NonZero)
      */
     default MultiSet<A> dec(A a) {
-        return dec(a, one());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -108,7 +107,7 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
      * @see MultiSet#dec(Object, Natural.NonZero)
      */
     default MultiSet<A> remove(A a) {
-        return get(a).match(constantly(this), k -> dec(a, k));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -120,7 +119,7 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
      * @return true if there are k <code>a</code>s in this {@link MultiSet}; false otherwise
      */
     default boolean contains(A a, NonZero k) {
-        return gte(k, get(a));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -132,7 +131,7 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
      * @return true if other is included in this {@link MultiSet}; false, otherwise
      */
     default boolean inclusion(MultiSet<A> other) {
-        return and().foldMap(into(this::contains), other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -145,7 +144,7 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
      * @see MultiSet#merge
      */
     default MultiSet<A> intersection(MultiSet<A> other) {
-        return merge(other, min());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -158,7 +157,7 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
      * @see MultiSet#merge
      */
     default MultiSet<A> union(MultiSet<A> other) {
-        return merge(other, max());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -172,7 +171,7 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
      * @see MultiSet#merge
      */
     default MultiSet<A> sum(MultiSet<A> other) {
-        return merge(other, Natural::plus);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -186,7 +185,7 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
      * @see MultiSet#merge
      */
     default MultiSet<A> difference(MultiSet<A> other) {
-        return merge(other, (n, k) -> n.minus(k).orElse(zero()));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -199,7 +198,7 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
      * @see MultiSet#difference(MultiSet)
      */
     default MultiSet<A> symmetricDifference(MultiSet<A> other) {
-        return difference(other).union(other.difference(this));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -210,21 +209,7 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
      * @return the merged {@link MultiSet}
      */
     default MultiSet<A> merge(MultiSet<A> other, Semigroup<Natural> semigroup) {
-        return foldLeft((acc, a) -> {
-                            Natural ourAs = get(a);
-                            return semigroup
-                                    .apply(ourAs, other.get(a))
-                                    .match(__ -> acc.remove(a),
-                                           nz -> nz.minus(ourAs)
-                                                   .flatMap(CoProduct2::projectB)
-                                                   .fmap(diff -> acc.inc(a, diff))
-                                                   .orElseGet(() -> ourAs.minus(nz)
-                                                           .flatMap(CoProduct2::projectB)
-                                                           .fmap(diff -> acc.dec(a, diff))
-                                                           .orElse(acc)));
-                        },
-                        this,
-                        other.unique().union(this.unique()));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -233,13 +218,14 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
      */
     @Override
     default boolean contains(A a) {
-        return contains(a, one());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Common {@link EquivalenceRelation}s between {@link MultiSet MultiSets}.
      */
     final class EquivalenceRelations {
+
         private EquivalenceRelations() {
         }
 
@@ -252,8 +238,7 @@ public interface MultiSet<A> extends Collection<Natural, Tuple2<A, NonZero>>, Ra
          * @return the {@link EquivalenceRelation}
          */
         public static <A, S extends MultiSet<A>> EquivalenceRelation<S> elementMultiplicity() {
-            EquivalenceRelation<S> elementMultiplicity = (xs, ys) -> and().foldMap(into(ys::contains), xs);
-            return Sizable.EquivalenceRelations.<S>sizeInfos().and(elementMultiplicity);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

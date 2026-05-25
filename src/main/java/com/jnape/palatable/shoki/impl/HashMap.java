@@ -11,10 +11,8 @@ import com.jnape.palatable.shoki.api.Map;
 import com.jnape.palatable.shoki.api.Natural;
 import com.jnape.palatable.shoki.api.Set;
 import com.jnape.palatable.shoki.api.SizeInfo.Known;
-
 import java.util.Iterator;
 import java.util.Objects;
-
 import static com.jnape.palatable.lambda.adt.Maybe.maybe;
 import static com.jnape.palatable.lambda.adt.Try.trying;
 import static com.jnape.palatable.lambda.functions.Fn2.curried;
@@ -116,20 +114,22 @@ import static java.lang.String.join;
  */
 public final class HashMap<K, V> implements Map<Natural, K, V> {
 
-    private static final HashMap<?, ?> EMPTY_OBJECT_DEFAULTS =
-            new HashMap<>(objectEquals(), objectHashCode(), rootNode());
+    private static final HashMap<?, ?> EMPTY_OBJECT_DEFAULTS = new HashMap<>(objectEquals(), objectHashCode(), rootNode());
 
     private final EquivalenceRelation<? super K> keyEqRel;
-    private final HashingAlgorithm<? super K>    keyHashAlg;
-    private final HAMT<K, V>                     hamt;
+
+    private final HashingAlgorithm<? super K> keyHashAlg;
+
+    private final HAMT<K, V> hamt;
 
     private volatile Natural size;
+
     private volatile Integer hashCode;
 
     private HashMap(EquivalenceRelation<? super K> keyEqRel, HashingAlgorithm<? super K> keyHashAlg, HAMT<K, V> hamt) {
-        this.keyEqRel   = keyEqRel;
+        this.keyEqRel = keyEqRel;
         this.keyHashAlg = keyHashAlg;
-        this.hamt       = hamt;
+        this.hamt = hamt;
     }
 
     /**
@@ -143,7 +143,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public Maybe<V> get(K key) {
-        return maybe(hamt.get(key, keyHashAlg.apply(key), keyEqRel, 0));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -157,8 +157,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public HashMap<K, V> put(K key, V value) {
-        return new HashMap<>(keyEqRel, keyHashAlg,
-                             hamt.put(key, value, keyHashAlg.apply(key), keyEqRel, keyHashAlg, 0));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -172,8 +171,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public HashMap<K, V> remove(K key) {
-        HAMT<K, V> removed = hamt.remove(key, keyHashAlg.apply(key), keyEqRel, 0);
-        return new HashMap<>(keyEqRel, keyHashAlg, removed != null ? removed : rootNode());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -183,7 +181,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public boolean contains(K key) {
-        return get(key).match(constantly(false), constantly(true));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -192,7 +190,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public HashSet<K> keys() {
-        return foldLeft((keys, kv) -> keys.add(kv._1()), hashSet(keyEqRel, keyHashAlg), this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -201,7 +199,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public StrictQueue<V> values() {
-        return foldLeft((values, kv) -> values.snoc(kv._2()), strictQueue(), this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -210,7 +208,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public Maybe<Tuple2<K, V>> head() {
-        return Head.head(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -219,9 +217,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public HashMap<K, V> tail() {
-        return head()
-                .fmap(into(curried(headKey -> constantly(remove(headKey)))))
-                .orElse(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -230,7 +226,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public boolean isEmpty() {
-        return Empty.empty(hamt);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -239,7 +235,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public HashMap<K, V> merge(Map<Natural, K, V> other, Semigroup<V> semigroup) {
-        return (HashMap<K, V>) Map.super.merge(other, semigroup);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -248,7 +244,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public HashMap<K, V> removeAll(Set<Natural, K> keys) {
-        return (HashMap<K, V>) Map.super.removeAll(keys);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -258,16 +254,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
     @Override
     @SuppressWarnings("DuplicatedCode")
     public Known<Natural> sizeInfo() {
-        Natural size = this.size;
-        if (size == null) {
-            synchronized (this) {
-                size = this.size;
-                if (size == null) {
-                    this.size = size = foldLeft((s, __) -> s.inc(), (Natural) zero(), this);
-                }
-            }
-        }
-        return known(size);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -275,7 +262,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public Iterator<Tuple2<K, V>> iterator() {
-        return hamt.iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -289,10 +276,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public boolean equals(Object other) {
-        return other instanceof HashMap<?, ?> &&
-                trying(() -> equivalent(entries(objectEquals()), this, downcast(other)))
-                        .catching(ClassCastException.class, constantly(false))
-                        .orThrow();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -303,16 +287,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public int hashCode() {
-        Integer hashCode = this.hashCode;
-        if (hashCode == null) {
-            synchronized (this) {
-                hashCode = this.hashCode;
-                if (hashCode == null) {
-                    this.hashCode = hashCode = hash(entries(keyHashAlg, objectHashCode()), this);
-                }
-            }
-        }
-        return hashCode;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -321,7 +296,7 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @Override
     public String toString() {
-        return "HashMap[" + join(", ", map(into((k, v) -> format("(%s=%s)", k, v)), this)) + "]";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -336,10 +311,8 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      * @return the {@link HashMap}
      */
     @SafeVarargs
-    public static <K, V> HashMap<K, V> hashMap(EquivalenceRelation<? super K> keyEquivalenceRelation,
-                                               HashingAlgorithm<? super K> keyHashingAlgorithm,
-                                               Tuple2<K, V>... entries) {
-        return hashMap(new HashMap<>(keyEquivalenceRelation, keyHashingAlgorithm, rootNode()), entries);
+    public static <K, V> HashMap<K, V> hashMap(EquivalenceRelation<? super K> keyEquivalenceRelation, HashingAlgorithm<? super K> keyHashingAlgorithm, Tuple2<K, V>... entries) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -354,14 +327,12 @@ public final class HashMap<K, V> implements Map<Natural, K, V> {
      */
     @SafeVarargs
     public static <K, V> HashMap<K, V> hashMap(Tuple2<K, V>... entries) {
-        @SuppressWarnings("unchecked") HashMap<K, V> empty = (HashMap<K, V>) EMPTY_OBJECT_DEFAULTS;
-        return hashMap(empty, entries);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @SafeVarargs
     private static <K, V> HashMap<K, V> hashMap(HashMap<K, V> hashMap, Tuple2<K, V>... entries) {
-        for (Tuple2<K, V> entry : entries)
-            hashMap = entry.into(hashMap::put);
+        for (Tuple2<K, V> entry : entries) hashMap = entry.into(hashMap::put);
         return hashMap;
     }
 }

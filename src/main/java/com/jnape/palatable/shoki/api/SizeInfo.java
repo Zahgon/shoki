@@ -2,9 +2,7 @@ package com.jnape.palatable.shoki.api;
 
 import com.jnape.palatable.lambda.adt.coproduct.CoProduct2;
 import com.jnape.palatable.lambda.functions.Fn1;
-
 import java.util.Objects;
-
 import static com.jnape.palatable.shoki.api.EquivalenceRelation.equivalent;
 import static com.jnape.palatable.shoki.api.EquivalenceRelation.objectEquals;
 
@@ -26,7 +24,7 @@ public abstract class SizeInfo implements CoProduct2<SizeInfo.Known<?>, SizeInfo
      * @return the known {@link SizeInfo}
      */
     public static <A extends Number> Known<A> known(A a) {
-        return new Known<>(a);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -35,7 +33,7 @@ public abstract class SizeInfo implements CoProduct2<SizeInfo.Known<?>, SizeInfo
      * @return the unknown {@link SizeInfo}
      */
     public static Unknown unknown() {
-        return Unknown.INSTANCE;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -44,6 +42,7 @@ public abstract class SizeInfo implements CoProduct2<SizeInfo.Known<?>, SizeInfo
      * @param <Size> the numeric size type
      */
     public static final class Known<Size extends Number> extends SizeInfo {
+
         private final Size size;
 
         private Known(Size size) {
@@ -56,28 +55,27 @@ public abstract class SizeInfo implements CoProduct2<SizeInfo.Known<?>, SizeInfo
          * @return the known size
          */
         public Size getSize() {
-            return size;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
-        public <R> R match(Fn1<? super Known<?>, ? extends R> aFn,
-                           Fn1<? super Unknown, ? extends R> bFn) {
-            return aFn.apply(this);
+        public <R> R match(Fn1<? super Known<?>, ? extends R> aFn, Fn1<? super Unknown, ? extends R> bFn) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean equals(Object other) {
-            return other instanceof Known && equivalent(objectEquals(), size, ((Known<?>) other).size);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public int hashCode() {
-            return Objects.hashCode(size);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String toString() {
-            return "Known{size=" + size + '}';
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -85,20 +83,20 @@ public abstract class SizeInfo implements CoProduct2<SizeInfo.Known<?>, SizeInfo
      * A {@link SizeInfo} that implies no assumptions about the representative size of some value.
      */
     public static final class Unknown extends SizeInfo {
+
         private static final Unknown INSTANCE = new Unknown();
 
         private Unknown() {
         }
 
         @Override
-        public <R> R match(Fn1<? super Known<?>, ? extends R> aFn,
-                           Fn1<? super Unknown, ? extends R> bFn) {
-            return bFn.apply(this);
+        public <R> R match(Fn1<? super Known<?>, ? extends R> aFn, Fn1<? super Unknown, ? extends R> bFn) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String toString() {
-            return "Unknown{}";
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

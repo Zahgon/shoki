@@ -10,11 +10,9 @@ import com.jnape.palatable.shoki.api.Natural;
 import com.jnape.palatable.shoki.api.Set;
 import com.jnape.palatable.shoki.api.SizeInfo;
 import com.jnape.palatable.shoki.api.SortedCollection;
-
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
-
 import static com.jnape.palatable.lambda.adt.Maybe.maybe;
 import static com.jnape.palatable.lambda.adt.Try.trying;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
@@ -77,15 +75,18 @@ import static java.util.Comparator.naturalOrder;
  * @param <V> the value type
  */
 public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection<Natural, Tuple2<K, V>, K> {
+
     private final Comparator<? super K> keyComparator;
-    private final RedBlackTree<K, V>    tree;
+
+    private final RedBlackTree<K, V> tree;
 
     private volatile Natural size;
+
     private volatile Integer hashCode;
 
     private TreeMap(Comparator<? super K> keyComparator, RedBlackTree<K, V> tree) {
         this.keyComparator = keyComparator;
-        this.tree          = tree;
+        this.tree = tree;
     }
 
     /**
@@ -94,7 +95,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      * @return the key {@link Comparator}
      */
     public Comparator<? super K> keyComparator() {
-        return keyComparator;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -103,7 +104,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public boolean isEmpty() {
-        return tree.isEmpty();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -112,7 +113,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public Maybe<V> get(K k) {
-        return maybe(tree.get(k, keyComparator));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -121,7 +122,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public Maybe<Tuple2<K, V>> min() {
-        return maybe(tree.min());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -130,7 +131,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public Maybe<Tuple2<K, V>> max() {
-        return maybe(tree.max());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -139,7 +140,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public boolean contains(K k) {
-        return get(k).match(constantly(false), constantly(true));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -148,7 +149,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public TreeMap<K, V> put(K k, V v) {
-        return new TreeMap<>(keyComparator, tree.insert(k, v, keyComparator));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -157,7 +158,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public TreeMap<K, V> remove(K k) {
-        return new TreeMap<>(keyComparator, tree.delete(k, keyComparator));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -166,7 +167,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public TreeMap<K, V> merge(Map<Natural, K, V> other, Semigroup<V> semigroup) {
-        return (TreeMap<K, V>) Map.super.merge(other, semigroup);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -175,7 +176,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public TreeMap<K, V> removeAll(Set<Natural, K> keys) {
-        return (TreeMap<K, V>) Map.super.removeAll(keys);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -185,7 +186,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public TreeSet<K> keys() {
-        return foldLeft((keys, kv) -> keys.add(kv._1()), treeSet(keyComparator), this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -193,7 +194,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public StrictQueue<V> values() {
-        return foldLeft((values, kv) -> values.snoc(kv._2()), strictQueue(), this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -204,9 +205,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public TreeMap<K, V> sort(Comparator<? super K> comparator) {
-        return Objects.equals(keyComparator, comparator)
-               ? this
-               : foldLeft((m, kv) -> kv.into(m::put), treeMap(comparator), this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -216,7 +215,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public TreeMap<K, V> reverse() {
-        return new TreeMap<>(keyComparator.reversed(), tree.reverse());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -228,7 +227,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public Maybe<Tuple2<K, V>> head() {
-        return min();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -239,7 +238,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public TreeMap<K, V> tail() {
-        return new TreeMap<>(keyComparator, tree.deleteMin());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -248,16 +247,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public SizeInfo.Known<Natural> sizeInfo() {
-        Natural size = this.size;
-        if (size == null) {
-            synchronized (this) {
-                size = this.size;
-                if (size == null) {
-                    this.size = size = foldLeft((s, __) -> s.inc(), (Natural) zero(), this);
-                }
-            }
-        }
-        return known(size);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -268,7 +258,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public Iterator<Tuple2<K, V>> iterator() {
-        return tree.iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -282,15 +272,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public boolean equals(Object other) {
-        if (other instanceof TreeMap<?, ?>) {
-            TreeMap<?, ?> that = (TreeMap<?, ?>) other;
-            return equivalent(objectEquals(), keyComparator, that.keyComparator)
-                    && trying(() -> equivalent(entries(objectEquals()), this,
-                                               Downcast.<TreeMap<K, V>, TreeMap<?, ?>>downcast(that)))
-                    .catching(ClassCastException.class, constantly(false))
-                    .orThrow();
-        }
-        return false;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -301,17 +283,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public int hashCode() {
-        Integer hashCode = this.hashCode;
-        if (hashCode == null) {
-            synchronized (this) {
-                hashCode = this.hashCode;
-                if (hashCode == null) {
-                    this.hashCode = hashCode = Objects.hashCode(keyComparator) * 31
-                            + hash(entries(objectHashCode(), objectHashCode()), this);
-                }
-            }
-        }
-        return hashCode;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -320,7 +292,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @Override
     public String toString() {
-        return "TreeMap[" + join(", ", map(into((k, v) -> format("(%s=%s)", k, v)), this)) + "]";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -335,7 +307,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @SafeVarargs
     public static <K, V> TreeMap<K, V> treeMap(Comparator<? super K> keyComparator, Tuple2<K, V>... entries) {
-        return new TreeMap<>(keyComparator, backingTree(keyComparator, entries));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -349,7 +321,7 @@ public final class TreeMap<K, V> implements Map<Natural, K, V>, SortedCollection
      */
     @SafeVarargs
     public static <K extends Comparable<? super K>, V> TreeMap<K, V> treeMap(Tuple2<K, V>... entries) {
-        return treeMap(naturalOrder(), entries);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static <K, V> RedBlackTree<K, V> backingTree(Comparator<? super K> keyComparator, Tuple2<K, V>[] entries) {

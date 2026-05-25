@@ -3,7 +3,6 @@ package com.jnape.palatable.shoki.api;
 import com.jnape.palatable.lambda.adt.Maybe;
 import com.jnape.palatable.lambda.adt.hlist.Tuple2;
 import com.jnape.palatable.lambda.semigroup.Semigroup;
-
 import static com.jnape.palatable.lambda.functions.Fn2.curried;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Into.into;
@@ -20,9 +19,7 @@ import static com.jnape.palatable.shoki.api.EquivalenceRelation.equivalent;
  * @param <K>    the key type
  * @param <V>    the value type
  */
-public interface Map<Size extends Number, K, V> extends
-        Collection<Size, Tuple2<K, V>>,
-        RandomAccess<K, Maybe<V>> {
+public interface Map<Size extends Number, K, V> extends Collection<Size, Tuple2<K, V>>, RandomAccess<K, Maybe<V>> {
 
     /**
      * Associate <code>k</code> with <code>v</code> inside this map.
@@ -74,7 +71,7 @@ public interface Map<Size extends Number, K, V> extends
      */
     @Override
     default boolean contains(K k) {
-        return get(k).match(constantly(false), constantly(true));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -82,7 +79,7 @@ public interface Map<Size extends Number, K, V> extends
      */
     @Override
     default boolean isEmpty() {
-        return Collection.super.isEmpty();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -110,9 +107,7 @@ public interface Map<Size extends Number, K, V> extends
      * @return the merged {@link Map}
      */
     default Map<Size, K, V> merge(Map<Size, K, V> other, Semigroup<V> semigroup) {
-        return foldLeft(curried(m -> into((k, v) -> m.put(k, m.get(k).fmap(semigroup.flip().apply(v)).orElse(v)))),
-                        this,
-                        other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -123,13 +118,14 @@ public interface Map<Size extends Number, K, V> extends
      * @return the updated {@link Map}
      */
     default Map<Size, K, V> removeAll(Set<Size, K> keys) {
-        return foldLeft(Map<Size, K, V>::remove, this, keys);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Common {@link EquivalenceRelation}s between {@link Map}s.
      */
     final class EquivalenceRelations {
+
         private EquivalenceRelations() {
         }
 
@@ -143,11 +139,8 @@ public interface Map<Size extends Number, K, V> extends
          * @param <M>        the {@link Map} subtype of the arguments
          * @return the {@link EquivalenceRelation}
          */
-        public static <K, V, M extends Map<?, K, V>> EquivalenceRelation<M> entries(
-                EquivalenceRelation<? super V> valueEqRel) {
-            return Sizable.EquivalenceRelations.<M>sizeInfos()
-                    .and((m1, m2) -> and()
-                            .foldMap(into((k, v) -> m2.get(k).fmap(valueEqRel.apply(v)).orElse(false)), m1));
+        public static <K, V, M extends Map<?, K, V>> EquivalenceRelation<M> entries(EquivalenceRelation<? super V> valueEqRel) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -160,10 +153,8 @@ public interface Map<Size extends Number, K, V> extends
          * @param <M>         the {@link Map} subtype of the arguments
          * @return the {@link EquivalenceRelation}
          */
-        public static <K, V, M extends Map<?, K, V>> EquivalenceRelation<M> keys(
-                EquivalenceRelation<? super Set<?, K>> keySetEqRel) {
-            return Sizable.EquivalenceRelations.<M>sizeInfos()
-                    .and((m1, m2) -> equivalent(keySetEqRel, m1.keys(), m2.keys()));
+        public static <K, V, M extends Map<?, K, V>> EquivalenceRelation<M> keys(EquivalenceRelation<? super Set<?, K>> keySetEqRel) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -171,6 +162,7 @@ public interface Map<Size extends Number, K, V> extends
      * Common {@link HashingAlgorithm}s for {@link Map}s.
      */
     final class HashingAlgorithms {
+
         private HashingAlgorithms() {
         }
 
@@ -184,12 +176,8 @@ public interface Map<Size extends Number, K, V> extends
          * @param <M>                   the  {@link Map} subtype of the argument
          * @return the {@link HashingAlgorithm}
          */
-        public static <K, V, M extends Map<?, K, V>> HashingAlgorithm<M> entries(
-                HashingAlgorithm<? super K> keyHashingAlgorithm,
-                HashingAlgorithm<? super V> valueHashingAlgorithm) {
-            return m -> foldLeft(Integer::sum, 0,
-                                 map(into((K k, V v) -> keyHashingAlgorithm.apply(k)
-                                         ^ valueHashingAlgorithm.apply(v)), m));
+        public static <K, V, M extends Map<?, K, V>> HashingAlgorithm<M> entries(HashingAlgorithm<? super K> keyHashingAlgorithm, HashingAlgorithm<? super V> valueHashingAlgorithm) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

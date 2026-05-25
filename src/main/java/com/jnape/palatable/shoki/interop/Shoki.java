@@ -11,7 +11,6 @@ import com.jnape.palatable.shoki.impl.StrictStack;
 import com.jnape.palatable.shoki.impl.TreeMap;
 import com.jnape.palatable.shoki.impl.TreeMultiSet;
 import com.jnape.palatable.shoki.impl.TreeSet;
-
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.Iterator;
@@ -21,7 +20,6 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.SortedMap;
 import java.util.SortedSet;
-
 import static com.jnape.palatable.lambda.functions.Fn2.curried;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Into.into;
@@ -33,6 +31,7 @@ import static java.util.Comparator.naturalOrder;
  * Common interoperability methods for translating from built-in Java types to Shoki types.
  */
 public final class Shoki {
+
     private Shoki() {
     }
 
@@ -50,30 +49,7 @@ public final class Shoki {
      * @return the populated {@link StrictStack}
      */
     public static <A> StrictStack<A> strictStack(Iterable<A> javaIterable) {
-        if (javaIterable instanceof StrictStack<?>)
-            return (StrictStack<A>) javaIterable;
-
-        Iterator<A> bestIteratorForStackConstruction =
-                javaIterable instanceof Deque<?>
-                ? ((Deque<A>) javaIterable).descendingIterator()
-                : javaIterable instanceof List<?>
-                  ? new Iterator<A>() {
-                    private final List<A> javaList = (List<A>) javaIterable;
-                    private final ListIterator<A> itr = javaList.listIterator(javaList.size());
-
-                    @Override
-                    public boolean hasNext() {
-                        return itr.hasPrevious();
-                    }
-
-                    @Override
-                    public A next() {
-                        return itr.previous();
-                    }
-                }
-                  : foldLeft(StrictStack::cons, StrictStack.<A>strictStack(), javaIterable).iterator();
-
-        return foldLeft(StrictStack::cons, StrictStack.strictStack(), () -> bestIteratorForStackConstruction);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -84,9 +60,7 @@ public final class Shoki {
      * @return the populated {@link StrictQueue}
      */
     public static <A> StrictQueue<A> strictQueue(Iterable<A> javaIterable) {
-        if (javaIterable instanceof StrictQueue<?>)
-            return (StrictQueue<A>) javaIterable;
-        return foldLeft(StrictQueue::snoc, StrictQueue.strictQueue(), javaIterable);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -100,7 +74,7 @@ public final class Shoki {
      * @return the populated {@link HashMap}
      */
     public static <K, V> HashMap<K, V> hashMap(java.util.Map<K, V> javaMap) {
-        return hashMap(javaMap.entrySet());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -114,9 +88,7 @@ public final class Shoki {
      * @return the populated {@link HashMap}
      */
     public static <K, V> HashMap<K, V> hashMap(Iterable<? extends Entry<K, V>> javaIterableOfEntries) {
-        if (javaIterableOfEntries instanceof HashMap<?, ?>)
-            return Downcast.<HashMap<K, V>, Iterable<? extends Entry<K, V>>>downcast(javaIterableOfEntries);
-        return foldLeft(curried(hm -> into(hm::put)), HashMap.hashMap(), javaIterableOfEntries);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -129,9 +101,8 @@ public final class Shoki {
      * @param <V>           the value type
      * @return the populated {@link TreeMap}
      */
-    public static <K, V> TreeMap<K, V> treeMap(Comparator<? super K> keyComparator,
-                                               java.util.Map<K, V> javaMap) {
-        return foldLeft(curried(tm -> into(tm::put)), TreeMap.treeMap(keyComparator), javaMap.entrySet());
+    public static <K, V> TreeMap<K, V> treeMap(Comparator<? super K> keyComparator, java.util.Map<K, V> javaMap) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -146,10 +117,7 @@ public final class Shoki {
      * @return the populated {@link TreeMap}
      */
     public static <K extends Comparable<? super K>, V> TreeMap<K, V> treeMap(java.util.Map<K, V> javaMap) {
-        Comparator<? super K> keyComparator = javaMap instanceof java.util.SortedMap<?, ?>
-                                              ? ((java.util.SortedMap<K, V>) javaMap).comparator()
-                                              : null;
-        return treeMap(keyComparator == null ? naturalOrder() : keyComparator, javaMap);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -161,13 +129,8 @@ public final class Shoki {
      * @param <V>                   the value type
      * @return the populated {@link TreeMap}
      */
-    public static <K extends Comparable<? super K>, V> TreeMap<K, V> treeMap(
-            Iterable<? extends Entry<K, V>> javaIterableOfEntries) {
-        //noinspection RedundantCast
-        if ((Iterable<?>) javaIterableOfEntries instanceof TreeMap<?, ?>)
-            return Downcast.<TreeMap<K, V>, Iterable<? extends Entry<K, V>>>downcast(javaIterableOfEntries);
-
-        return foldLeft(curried(tm -> into(tm::put)), TreeMap.treeMap(), javaIterableOfEntries);
+    public static <K extends Comparable<? super K>, V> TreeMap<K, V> treeMap(Iterable<? extends Entry<K, V>> javaIterableOfEntries) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -180,9 +143,7 @@ public final class Shoki {
      * @return the populated {@link HashSet}
      */
     public static <A> HashSet<A> hashSet(Iterable<A> javaIterable) {
-        if (javaIterable instanceof HashSet<?>)
-            return (HashSet<A>) javaIterable;
-        return foldLeft(HashSet::add, HashSet.hashSet(), javaIterable);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -195,7 +156,7 @@ public final class Shoki {
      * @return the populated {@link TreeSet}
      */
     public static <A> TreeSet<A> treeSet(Comparator<? super A> comparator, Iterable<A> javaIterable) {
-        return foldLeft(TreeSet::add, TreeSet.treeSet(comparator), javaIterable);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -208,14 +169,7 @@ public final class Shoki {
      * @return the populated {@link HashSet}
      */
     public static <A extends Comparable<? super A>> TreeSet<A> treeSet(Iterable<A> javaIterable) {
-        if (javaIterable instanceof TreeSet<?>)
-            return (TreeSet<A>) javaIterable;
-
-        Comparator<? super A> comparator = javaIterable instanceof java.util.SortedSet<?>
-                                           ? ((java.util.SortedSet<A>) javaIterable).comparator()
-                                           : null;
-
-        return treeSet(comparator == null ? naturalOrder() : comparator, javaIterable);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -231,10 +185,7 @@ public final class Shoki {
      * @return the populated {@link HashMultiSet}
      */
     public static <A> HashMultiSet<A> hashMultiSet(java.util.Map<A, Integer> javaMap) {
-        return foldLeft(curried(hms -> into((a, k) -> atLeastZero(k).match(constantly(hms),
-                                                                           nonZeroK -> hms.inc(a, nonZeroK)))),
-                        HashMultiSet.hashMultiSet(),
-                        javaMap.entrySet());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -247,7 +198,7 @@ public final class Shoki {
      * @return the populated {@link HashMultiSet}
      */
     public static <A> HashMultiSet<A> hashMultiSet(Iterable<A> javaIterable) {
-        return foldLeft(HashMultiSet::inc, HashMultiSet.hashMultiSet(), javaIterable);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -262,12 +213,8 @@ public final class Shoki {
      * @param <A>        the element type
      * @return the populated {@link TreeMultiSet}
      */
-    public static <A> TreeMultiSet<A> treeMultiSet(Comparator<? super A> comparator,
-                                                   java.util.Map<A, Integer> javaMap) {
-        return foldLeft(curried(tms -> into((a, k) -> atLeastZero(k).match(constantly(tms),
-                                                                           nonZeroK -> tms.inc(a, nonZeroK)))),
-                        TreeMultiSet.treeMultiSet(comparator),
-                        javaMap.entrySet());
+    public static <A> TreeMultiSet<A> treeMultiSet(Comparator<? super A> comparator, java.util.Map<A, Integer> javaMap) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -283,10 +230,7 @@ public final class Shoki {
      * @return the populated {@link TreeMultiSet}
      */
     public static <A extends Comparable<? super A>> TreeMultiSet<A> treeMultiSet(java.util.Map<A, Integer> javaMap) {
-        Comparator<? super A> comparator = javaMap instanceof SortedMap<?, ?>
-                                           ? ((SortedMap<A, Integer>) javaMap).comparator()
-                                           : null;
-        return treeMultiSet(comparator == null ? naturalOrder() : comparator, javaMap);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -301,9 +245,8 @@ public final class Shoki {
      * @param <A>          the element type
      * @return the populated {@link TreeMultiSet}
      */
-    public static <A> TreeMultiSet<A> treeMultiSet(Comparator<? super A> comparator,
-                                                   Iterable<A> javaIterable) {
-        return foldLeft(TreeMultiSet::inc, TreeMultiSet.treeMultiSet(comparator), javaIterable);
+    public static <A> TreeMultiSet<A> treeMultiSet(Comparator<? super A> comparator, Iterable<A> javaIterable) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -319,9 +262,6 @@ public final class Shoki {
      * @return the populated {@link TreeMultiSet}
      */
     public static <A extends Comparable<? super A>> TreeMultiSet<A> treeMultiSet(Iterable<A> javaIterable) {
-        Comparator<? super A> comparator = javaIterable instanceof SortedSet<?>
-                                           ? ((SortedSet<A>) javaIterable).comparator()
-                                           : null;
-        return treeMultiSet(comparator == null ? naturalOrder() : comparator, javaIterable);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

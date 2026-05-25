@@ -3,10 +3,8 @@ package com.jnape.palatable.shoki.api;
 import com.jnape.palatable.lambda.functions.Fn1;
 import com.jnape.palatable.lambda.functions.specialized.BiPredicate;
 import com.jnape.palatable.lambda.functor.Applicative;
-
 import java.util.Comparator;
 import java.util.Objects;
-
 import static com.jnape.palatable.lambda.functions.Fn2.curried;
 import static java.util.Comparator.naturalOrder;
 
@@ -30,7 +28,7 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      */
     @Override
     default EquivalenceRelation<A> and(BiPredicate<? super A, ? super A> other) {
-        return BiPredicate.super.and(other)::apply;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -38,7 +36,7 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      */
     @Override
     default EquivalenceRelation<A> flip() {
-        return BiPredicate.super.flip()::apply;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -46,7 +44,7 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      */
     @Override
     default <D> EquivalenceRelation<A> discardR(Applicative<D, Fn1<A, ?>> appB) {
-        return BiPredicate.super.discardR(appB)::apply;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -54,7 +52,7 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      */
     @Override
     default EquivalenceRelation<A> or(BiPredicate<? super A, ? super A> other) {
-        return BiPredicate.super.or(other)::apply;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -62,7 +60,7 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      */
     @Override
     default EquivalenceRelation<A> negate() {
-        return BiPredicate.super.negate()::apply;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -70,7 +68,7 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      */
     @Override
     default EquivalenceRelation<A> local(Fn1<? super A, ? extends A> fn) {
-        return curried(BiPredicate.super.local(fn))::apply;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -78,7 +76,7 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      */
     @Override
     default EquivalenceRelation<A> censor(Fn1<? super A, ? extends A> fn) {
-        return curried(BiPredicate.super.censor(fn))::apply;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -89,7 +87,7 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      * @see Objects#equals(Object, Object)
      */
     static <A> EquivalenceRelation<A> objectEquals() {
-        return Objects::equals;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -99,7 +97,7 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      * @return the {@link EquivalenceRelation}
      */
     static <A> EquivalenceRelation<A> referenceEquals() {
-        return (x, y) -> x == y;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -112,7 +110,7 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      * @see Comparator#compare(Object, Object)
      */
     static <A> EquivalenceRelation<A> comparablyEquals(Comparator<? super A> comparator) {
-        return (x, y) -> comparator.compare(x, y) == 0;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -123,9 +121,8 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      * @return the {@link EquivalenceRelation}
      */
     static <A extends Comparable<? super A>> EquivalenceRelation<A> comparablyEquals() {
-        return comparablyEquals(naturalOrder());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     /**
      * An {@link EquivalenceRelation} implemented in terms of {@link java.util.Arrays#equals(Object[], Object[])}.
@@ -135,7 +132,7 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      * @see java.util.Arrays#equals(Object[], Object[])
      */
     static <A> EquivalenceRelation<A[]> arraysEquals() {
-        return java.util.Arrays::equals;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -145,7 +142,7 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      * @see java.util.Arrays#deepEquals(Object[], Object[])
      */
     static EquivalenceRelation<Object[]> arraysDeepEquals() {
-        return java.util.Arrays::deepEquals;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -159,6 +156,6 @@ public interface EquivalenceRelation<A> extends BiPredicate<A, A> {
      * @return true if the values are equal according to the {@link EquivalenceRelation}; false otherwise
      */
     static <A> boolean equivalent(EquivalenceRelation<? super A> equivalenceRelation, A x, A y) {
-        return equivalenceRelation.apply(x, y);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

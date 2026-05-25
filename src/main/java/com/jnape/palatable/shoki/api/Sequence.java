@@ -1,10 +1,8 @@
 package com.jnape.palatable.shoki.api;
 
 import com.jnape.palatable.lambda.adt.Maybe;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
 
 /**
@@ -40,7 +38,7 @@ public interface Sequence<A> extends Iterable<A> {
      * @return true if this {@link Sequence} is empty; false, otherwise
      */
     default boolean isEmpty() {
-        return head().fmap(constantly(false)).orElse(true);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -55,26 +53,6 @@ public interface Sequence<A> extends Iterable<A> {
      */
     @Override
     default Iterator<A> iterator() {
-        class NaiveIterator implements Iterator<A> {
-            private Sequence<A> sequence;
-
-            private NaiveIterator(Sequence<A> sequence) {
-                this.sequence = sequence;
-            }
-
-            @Override
-            public boolean hasNext() {
-                return !sequence.isEmpty();
-            }
-
-            @Override
-            public A next() {
-                A next = sequence.head().orElseThrow(NoSuchElementException::new);
-                sequence = sequence.tail();
-                return next;
-            }
-        }
-
-        return new NaiveIterator(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

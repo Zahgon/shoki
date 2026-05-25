@@ -4,11 +4,9 @@ import com.jnape.palatable.lambda.adt.hlist.Tuple2;
 import com.jnape.palatable.lambda.adt.product.Product2;
 import com.jnape.palatable.shoki.api.EquivalenceRelation;
 import com.jnape.palatable.shoki.api.HashingAlgorithm;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-
 import static com.jnape.palatable.lambda.adt.hlist.HList.tuple;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Flatten.flatten;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Eq.eq;
@@ -29,8 +27,7 @@ interface HAMT<K, V> extends Iterable<Tuple2<K, V>> {
 
     int LEVEL_SIZE = 5;
 
-    HAMT<K, V> put(K key, V value, int keyHash, EquivalenceRelation<? super K> keyEqRel,
-                   HashingAlgorithm<? super K> keyHashAlg, int shift);
+    HAMT<K, V> put(K key, V value, int keyHash, EquivalenceRelation<? super K> keyEqRel, HashingAlgorithm<? super K> keyHashAlg, int shift);
 
     V get(K key, int keyHash, EquivalenceRelation<? super K> keyEqRel, int shift);
 
@@ -40,59 +37,38 @@ interface HAMT<K, V> extends Iterable<Tuple2<K, V>> {
 
         private static final Node<?, ?> ROOT = new Node<>(0, new Object[0]);
 
-        private final int      bitmap;
+        private final int bitmap;
+
         private final Object[] table;
 
         public Node(int bitmap, Object[] table) {
             this.bitmap = bitmap;
-            this.table  = table;
+            this.table = table;
         }
 
         @Override
         public V get(K key, int keyHash, EquivalenceRelation<? super K> keyEqRel, int shift) {
-            int bitmapIndex = bitmapIndex(keyHash, shift);
-            return bitIsSet(bitmap, bitmapIndex)
-                   ? valueAtIndex(tableIndex(bitmapIndex)).get(key, keyHash, keyEqRel, shift + LEVEL_SIZE)
-                   : null;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
-        public Node<K, V> put(K key, V value, int keyHash, EquivalenceRelation<? super K> keyEqRel,
-                              HashingAlgorithm<? super K> keyHashAlg, int shift) {
-            int bitmapIndex = bitmapIndex(keyHash, shift);
-            int tableIndex  = tableIndex(bitmapIndex);
-            return bitIsSet(bitmap, bitmapIndex)
-                   ? overrideAt(tableIndex,
-                                valueAtIndex(tableIndex).put(key, value, keyHash, keyEqRel, keyHashAlg, shift + LEVEL_SIZE))
-                   : insertAt(tableIndex, bitmapIndex, new Entry<>(key, value));
+        public Node<K, V> put(K key, V value, int keyHash, EquivalenceRelation<? super K> keyEqRel, HashingAlgorithm<? super K> keyHashAlg, int shift) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Iterator<Tuple2<K, V>> iterator() {
-            @SuppressWarnings("unchecked")
-            List<HAMT<K, V>> bodies = (List<HAMT<K, V>>) (Object) asList(table);
-            return flatten(bodies).iterator();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public HAMT<K, V> remove(K key, int keyHash, EquivalenceRelation<? super K> keyEqRel, int shift) {
-            int bitmapIndex = bitmapIndex(keyHash, shift);
-            if (!bitIsSet(bitmap, bitmapIndex))
-                return this;
-
-            int        tableIndex = tableIndex(bitmapIndex);
-            HAMT<K, V> override   = valueAtIndex(tableIndex).remove(key, keyHash, keyEqRel, shift + LEVEL_SIZE);
-            return override == null ? deleteAt(bitmapIndex, tableIndex) : overrideAt(tableIndex, override);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean equals(Object other) {
-            if (other instanceof Node<?, ?>) {
-                Node<?, ?> node = (Node<?, ?>) other;
-                return bitmap == node.bitmap &&
-                        java.util.Arrays.equals(table, node.table);
-            }
-            return false;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         private int tableIndex(int bitmapIndex) {
@@ -118,7 +94,7 @@ interface HAMT<K, V> extends Iterable<Tuple2<K, V>> {
 
         @SuppressWarnings("unchecked")
         static <K, V> HAMT<K, V> rootNode() {
-            return (HAMT<K, V>) ROOT;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         private static int bitmapIndex(int keyHash, int shift) {
@@ -129,6 +105,7 @@ interface HAMT<K, V> extends Iterable<Tuple2<K, V>> {
     final class Entry<K, V> implements HAMT<K, V>, Product2<K, V> {
 
         private final K k;
+
         private final V v;
 
         Entry(K k, V v) {
@@ -138,106 +115,74 @@ interface HAMT<K, V> extends Iterable<Tuple2<K, V>> {
 
         @Override
         public K _1() {
-            return k;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public V _2() {
-            return v;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
-        public HAMT<K, V> put(K newKey, V newValue, int keyHash,
-                              EquivalenceRelation<? super K> keyEqRel, HashingAlgorithm<? super K> keyHashAlg,
-                              int shift) {
-            if (keyEqRel.apply(newKey, k))
-                return new Entry<>(newKey, newValue);
-
-            if (shift > 30)
-                return new Collision<>(keyHash, strictStack(this, new Entry<>(newKey, newValue)));
-
-            Integer existingKeyHash = keyHashAlg.apply(k);
-            return Node.<K, V>rootNode()
-                    .put(k, v, existingKeyHash, keyEqRel, keyHashAlg, shift)
-                    .put(newKey, newValue, keyHash, keyEqRel, keyHashAlg, shift);
+        public HAMT<K, V> put(K newKey, V newValue, int keyHash, EquivalenceRelation<? super K> keyEqRel, HashingAlgorithm<? super K> keyHashAlg, int shift) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Iterator<Tuple2<K, V>> iterator() {
-            return singleton(tuple(k, v)).iterator();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public V get(K key, int keyHash, EquivalenceRelation<? super K> keyEqRel, int shift) {
-            return keyEqRel.apply(key, k) ? v : null;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public HAMT<K, V> remove(K key, int keyHash, EquivalenceRelation<? super K> keyEqRel, int shift) {
-            return !keyEqRel.apply(key, k) ? this : null;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean equals(Object other) {
-            if (other instanceof Entry<?, ?>) {
-                Entry<?, ?> entry = (Entry<?, ?>) other;
-                return Objects.equals(k, entry.k) && Objects.equals(v, entry.v);
-            }
-            return false;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     final class Collision<K, V> implements HAMT<K, V> {
-        private final int                      keyHash;
+
+        private final int keyHash;
+
         private final StrictStack<Entry<K, V>> kvPairs;
 
-        Collision(int keyHash,
-                  StrictStack<Entry<K, V>> kvPairs) {
+        Collision(int keyHash, StrictStack<Entry<K, V>> kvPairs) {
             this.keyHash = keyHash;
             this.kvPairs = kvPairs;
         }
 
         @Override
-        public HAMT<K, V> put(K key, V value, int keyHash, EquivalenceRelation<? super K> keyEqRel,
-                              HashingAlgorithm<? super K> keyHashAlg, int shift) {
-            return new Collision<>(keyHash, foldLeft(((s, kv) -> !keyEqRel.apply(key, kv._1()) ? s.cons(kv) : s),
-                                                     strictStack(new Entry<>(key, value)),
-                                                     kvPairs));
+        public HAMT<K, V> put(K key, V value, int keyHash, EquivalenceRelation<? super K> keyEqRel, HashingAlgorithm<? super K> keyHashAlg, int shift) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Iterator<Tuple2<K, V>> iterator() {
-            return map(Tuple2::fromEntry, kvPairs).iterator();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public V get(K key, int keyHash, EquivalenceRelation<? super K> keyEqRel, int shift) {
-            return keyHash == this.keyHash
-                   ? find(kvPair -> keyEqRel.apply(key, kvPair._1()), kvPairs).fmap(Entry::_2).orElse(null)
-                   : null;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public HAMT<K, V> remove(K key, int keyHash, EquivalenceRelation<? super K> keyEqRel, int shift) {
-            if (keyHash != this.keyHash)
-                return this;
-
-            StrictStack<Entry<K, V>> withoutKey = foldLeft(((s, kv) -> !keyEqRel.apply(key, kv._1()) ? s.cons(kv) : s),
-                                                           strictStack(),
-                                                           kvPairs);
-            return eq(withoutKey.sizeInfo().getSize(), one())
-                   ? withoutKey.iterator().next()
-                   : new Collision<>(keyHash, withoutKey);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean equals(Object other) {
-            if (other instanceof Collision<?, ?>) {
-                Collision<?, ?> collision = (Collision<?, ?>) other;
-                return Objects.equals(keyHash, collision.keyHash) &&
-                        Objects.equals(kvPairs, collision.kvPairs);
-            }
-            return false;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

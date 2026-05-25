@@ -9,10 +9,8 @@ import com.jnape.palatable.shoki.api.Natural;
 import com.jnape.palatable.shoki.api.Natural.NonZero;
 import com.jnape.palatable.shoki.api.SizeInfo.Known;
 import com.jnape.palatable.shoki.api.SortedCollection;
-
 import java.util.Comparator;
 import java.util.Iterator;
-
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Id.id;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Into.into;
@@ -48,7 +46,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      * @return the element {@link Comparator}
      */
     public Comparator<? super A> comparator() {
-        return multiplicityMap.keyComparator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -57,7 +55,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> inc(A a, NonZero k) {
-        return new TreeMultiSet<>(multiplicityMap.put(a, multiplicityMap.get(a).fmap(k::plus).orElse(k)));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -66,12 +64,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> dec(A a, NonZero k) {
-        return multiplicityMap.get(a)
-                .fmap(n -> new TreeMultiSet<>(n.minus(k).orElse(zero())
-                                                      .match(zero -> multiplicityMap.remove(a),
-                                                             difference -> multiplicityMap.put(a, difference))
-                ))
-                .orElse(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -80,7 +73,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeSet<A> unique() {
-        return multiplicityMap.keys();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -89,7 +82,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> sum(MultiSet<A> other) {
-        return (TreeMultiSet<A>) MultiSet.super.sum(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -98,7 +91,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public boolean isEmpty() {
-        return multiplicityMap.isEmpty();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -107,7 +100,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> remove(A a) {
-        return new TreeMultiSet<>(multiplicityMap.remove(a));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -116,7 +109,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> inc(A a) {
-        return (TreeMultiSet<A>) MultiSet.super.inc(a);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -125,7 +118,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> dec(A a) {
-        return (TreeMultiSet<A>) MultiSet.super.dec(a);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -134,7 +127,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public Natural get(A a) {
-        return multiplicityMap.get(a).match(constantly(zero()), id());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -143,7 +136,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public Maybe<Tuple2<A, NonZero>> min() {
-        return multiplicityMap.min();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -152,7 +145,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public Maybe<Tuple2<A, NonZero>> max() {
-        return multiplicityMap.max();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -161,7 +154,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> sort(Comparator<? super A> comparator) {
-        return new TreeMultiSet<>(multiplicityMap.sort(comparator));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -170,7 +163,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> reverse() {
-        return new TreeMultiSet<>(multiplicityMap.reverse());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -179,16 +172,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public Known<Natural> sizeInfo() {
-        Natural size = this.size;
-        if (size == null) {
-            synchronized (this) {
-                size = this.size;
-                if (size == null) {
-                    this.size = size = foldLeft(Natural::plus, (Natural) zero(), multiplicityMap.values());
-                }
-            }
-        }
-        return known(size);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -197,7 +181,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> tail() {
-        return new TreeMultiSet<>(multiplicityMap.tail());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -206,7 +190,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public Maybe<Tuple2<A, NonZero>> head() {
-        return multiplicityMap.head();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -215,7 +199,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> intersection(MultiSet<A> other) {
-        return (TreeMultiSet<A>) MultiSet.super.intersection(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -224,7 +208,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> union(MultiSet<A> other) {
-        return (TreeMultiSet<A>) MultiSet.super.union(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -233,7 +217,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> difference(MultiSet<A> other) {
-        return (TreeMultiSet<A>) MultiSet.super.difference(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -242,7 +226,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> symmetricDifference(MultiSet<A> other) {
-        return (TreeMultiSet<A>) MultiSet.super.symmetricDifference(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -251,7 +235,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public TreeMultiSet<A> merge(MultiSet<A> other, Semigroup<Natural> semigroup) {
-        return (TreeMultiSet<A>) MultiSet.super.merge(other, semigroup);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -259,7 +243,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public Iterator<Tuple2<A, NonZero>> iterator() {
-        return multiplicityMap.iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -273,7 +257,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public boolean equals(Object other) {
-        return other instanceof TreeMultiSet<?> && multiplicityMap.equals(((TreeMultiSet<?>) other).multiplicityMap);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -284,7 +268,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public int hashCode() {
-        return multiplicityMap.hashCode();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -293,8 +277,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @Override
     public String toString() {
-        return "TreeMultiSet["
-                + join(", ", map(into((a, k) -> format("(%s * %s)", a, k.bigIntegerValue())), this)) + "]";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -308,7 +291,7 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @SafeVarargs
     public static <A> TreeMultiSet<A> treeMultiSet(Comparator<? super A> comparator, A... as) {
-        return treeMultiSet(new TreeMultiSet<>(treeMap(comparator)), as);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -322,12 +305,11 @@ public final class TreeMultiSet<A> implements MultiSet<A>, SortedCollection<Natu
      */
     @SafeVarargs
     public static <A extends Comparable<? super A>> TreeMultiSet<A> treeMultiSet(A... as) {
-        return treeMultiSet(naturalOrder(), as);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static <A> TreeMultiSet<A> treeMultiSet(TreeMultiSet<A> treeMultiSet, A[] as) {
-        for (A a : as)
-            treeMultiSet = treeMultiSet.inc(a);
+        for (A a : as) treeMultiSet = treeMultiSet.inc(a);
         return treeMultiSet;
     }
 }

@@ -6,18 +6,18 @@ final class Bitmap32 {
     }
 
     static int unsetBit(int bitmap, int index) {
-        return bitmap & ~(1 << index);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     static int setBit(int bitmap, int index) {
-        return bitmap | (1 << index);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     static boolean bitIsSet(int bitmap, int index) {
-        return (bitmap & 1 << index) != 0;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     static int lowerBits(int bitmap, int index) {
-        return bitmap & (1 << index) - 1;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

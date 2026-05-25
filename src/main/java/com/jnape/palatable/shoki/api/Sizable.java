@@ -33,7 +33,7 @@ public interface Sizable {
          * @return the {@link EquivalenceRelation}
          */
         public static <S extends Sizable> EquivalenceRelation<S> sizeInfos() {
-            return (xs, ys) -> equivalent(objectEquals(), xs.sizeInfo(), ys.sizeInfo());
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

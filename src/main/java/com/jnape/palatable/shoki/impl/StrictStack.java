@@ -6,10 +6,8 @@ import com.jnape.palatable.shoki.api.Natural;
 import com.jnape.palatable.shoki.api.SizeInfo;
 import com.jnape.palatable.shoki.api.SizeInfo.Known;
 import com.jnape.palatable.shoki.api.Stack;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 import static com.jnape.palatable.lambda.adt.Maybe.just;
 import static com.jnape.palatable.lambda.adt.Maybe.nothing;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Downcast.downcast;
@@ -42,7 +40,7 @@ public abstract class StrictStack<A> implements Stack<Natural, A> {
      */
     @Override
     public final StrictStack<A> cons(A a) {
-        return new Head<>(a, this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -61,7 +59,7 @@ public abstract class StrictStack<A> implements Stack<Natural, A> {
      */
     @Override
     public StrictStack<A> reverse() {
-        return foldLeft(StrictStack::cons, strictStack(), this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -93,7 +91,7 @@ public abstract class StrictStack<A> implements Stack<Natural, A> {
      */
     @Override
     public StrictStack<A> consAll(Collection<Natural, A> other) {
-        return (StrictStack<A>) Stack.super.consAll(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -105,8 +103,7 @@ public abstract class StrictStack<A> implements Stack<Natural, A> {
      */
     @Override
     public final boolean equals(Object other) {
-        return other instanceof StrictStack<?> &&
-                equivalent(elementsInOrder(objectEquals()), this, downcast(other));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -114,25 +111,7 @@ public abstract class StrictStack<A> implements Stack<Natural, A> {
      */
     @Override
     public final Iterator<A> iterator() {
-        return new Iterator<A>() {
-            StrictStack<A> rest = StrictStack.this;
-
-            @Override
-            public boolean hasNext() {
-                return rest instanceof Head<?>;
-            }
-
-            @Override
-            public A next() {
-                if (!hasNext())
-                    throw new NoSuchElementException();
-
-                Head<A> head = (Head<A>) this.rest;
-                A       next = head.head;
-                rest = head.tail;
-                return next;
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -151,18 +130,7 @@ public abstract class StrictStack<A> implements Stack<Natural, A> {
      */
     @Override
     public final String toString() {
-        StringBuilder body = new StringBuilder("StrictStack[");
-
-        StrictStack<A> next = this;
-        while (next != Empty.INSTANCE) {
-            Head<A> head = (Head<A>) next;
-            body.append(head.head);
-            next = head.tail;
-            if (next != Empty.INSTANCE)
-                body.append(", ");
-        }
-
-        return body.append("]").toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -175,18 +143,17 @@ public abstract class StrictStack<A> implements Stack<Natural, A> {
      */
     @SafeVarargs
     public static <A> StrictStack<A> strictStack(A... as) {
-        @SuppressWarnings("unchecked")
-        StrictStack<A> result = (StrictStack<A>) Empty.INSTANCE;
-        for (int i = as.length - 1; i >= 0; i--)
-             result = result.cons(as[i]);
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static final class Head<A> extends StrictStack<A> {
-        private final A              head;
+
+        private final A head;
+
         private final StrictStack<A> tail;
 
         private volatile Natural size;
+
         private volatile Integer hashCode;
 
         private Head(A head, StrictStack<A> tail) {
@@ -196,50 +163,33 @@ public abstract class StrictStack<A> implements Stack<Natural, A> {
 
         @Override
         public boolean isEmpty() {
-            return false;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Maybe<A> head() {
-            return just(head);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public StrictStack<A> tail() {
-            return tail;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         @SuppressWarnings("DuplicatedCode")
         public Known<Natural> sizeInfo() {
-            Natural size = this.size;
-            if (size == null) {
-                synchronized (this) {
-                    size = this.size;
-                    if (size == null) {
-                        this.size = size = foldLeft((s, __) -> s.inc(), (Natural) zero(), this);
-                    }
-                }
-            }
-            return known(size);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public int hashCode() {
-            Integer hashCode = this.hashCode;
-            if (hashCode == null) {
-                synchronized (this) {
-                    hashCode = this.hashCode;
-                    if (hashCode == null) {
-                        this.hashCode = hashCode = hash(elementsInOrder(objectHashCode()), this);
-                    }
-                }
-            }
-            return hashCode;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     private static final class Empty<A> extends StrictStack<A> {
+
         private static final Empty<?> INSTANCE = new Empty<>();
 
         private Empty() {
@@ -247,27 +197,27 @@ public abstract class StrictStack<A> implements Stack<Natural, A> {
 
         @Override
         public boolean isEmpty() {
-            return true;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Maybe<A> head() {
-            return nothing();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public StrictStack<A> tail() {
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Known<Natural> sizeInfo() {
-            return known(zero());
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public int hashCode() {
-            return 0;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

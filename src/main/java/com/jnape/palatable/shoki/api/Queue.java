@@ -1,7 +1,6 @@
 package com.jnape.palatable.shoki.api;
 
 import com.jnape.palatable.shoki.impl.StrictQueue;
-
 import static com.jnape.palatable.lambda.functions.builtin.fn3.FoldLeft.foldLeft;
 
 /**
@@ -41,6 +40,6 @@ public interface Queue<Size extends Number, A> extends OrderedCollection<Size, A
      * @return the updated {@link Queue}
      */
     default Queue<Size, A> snocAll(Collection<Size, A> collection) {
-        return foldLeft(Queue<Size, A>::snoc, this, collection);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

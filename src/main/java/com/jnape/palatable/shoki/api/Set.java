@@ -44,7 +44,7 @@ public interface Set<Size extends Number, A> extends Collection<Size, A>, Member
      * @return this {@link Set} after including all elements of collection
      */
     default Set<Size, A> addAll(Collection<Size, A> collection) {
-        return foldLeft(Set<Size, A>::add, this, collection);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -56,7 +56,7 @@ public interface Set<Size extends Number, A> extends Collection<Size, A>, Member
      * @return the intersection {@link Set}
      */
     default Set<Size, A> intersection(Set<Size, A> other) {
-        return foldLeft((intersection, a) -> other.contains(a) ? intersection : intersection.remove(a), this, this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -69,7 +69,7 @@ public interface Set<Size extends Number, A> extends Collection<Size, A>, Member
      * @see Set#addAll(Collection)
      */
     default Set<Size, A> union(Set<Size, A> other) {
-        return addAll(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -82,7 +82,7 @@ public interface Set<Size extends Number, A> extends Collection<Size, A>, Member
      * @return the difference {@link Set}
      */
     default Set<Size, A> difference(Set<Size, A> other) {
-        return foldLeft(Set<Size, A>::remove, this, other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -96,7 +96,7 @@ public interface Set<Size extends Number, A> extends Collection<Size, A>, Member
      * @return the symmetric difference {@link Set}
      */
     default Set<Size, A> symmetricDifference(Set<Size, A> other) {
-        return difference(other).union(other.difference(this));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -116,8 +116,7 @@ public interface Set<Size extends Number, A> extends Collection<Size, A>, Member
          * @return the {@link EquivalenceRelation}
          */
         public static <A, S extends Set<?, A>> EquivalenceRelation<S> sameElements() {
-            EquivalenceRelation<S> sameElements = (xs, ys) -> and().foldMap(ys::contains, xs);
-            return Sizable.EquivalenceRelations.<S>sizeInfos().and(sameElements);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

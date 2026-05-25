@@ -9,10 +9,8 @@ import com.jnape.palatable.shoki.api.HashingAlgorithm;
 import com.jnape.palatable.shoki.api.Natural;
 import com.jnape.palatable.shoki.api.Set;
 import com.jnape.palatable.shoki.api.SizeInfo.Known;
-
 import java.util.Iterator;
 import java.util.Objects;
-
 import static com.jnape.palatable.lambda.adt.Unit.UNIT;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Into.into;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Map.map;
@@ -43,7 +41,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public HashSet<A> add(A a) {
-        return new HashSet<>(map.put(a, UNIT));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -52,7 +50,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public HashSet<A> remove(A a) {
-        return new HashSet<>(map.remove(a));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -61,7 +59,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public Known<Natural> sizeInfo() {
-        return map.sizeInfo();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -70,7 +68,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public Maybe<A> head() {
-        return map.head().fmap(Tuple2::_1);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -79,7 +77,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public HashSet<A> tail() {
-        return new HashSet<>(map.tail());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -89,7 +87,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public boolean contains(A a) {
-        return map.contains(a);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -98,7 +96,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public boolean isEmpty() {
-        return map.isEmpty();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -107,7 +105,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public HashSet<A> addAll(Collection<Natural, A> collection) {
-        return (HashSet<A>) Set.super.addAll(collection);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -116,7 +114,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public HashSet<A> intersection(Set<Natural, A> other) {
-        return (HashSet<A>) Set.super.intersection(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -125,7 +123,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public HashSet<A> union(Set<Natural, A> other) {
-        return (HashSet<A>) Set.super.union(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -134,7 +132,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public HashSet<A> difference(Set<Natural, A> other) {
-        return (HashSet<A>) Set.super.difference(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -143,7 +141,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public HashSet<A> symmetricDifference(Set<Natural, A> other) {
-        return (HashSet<A>) Set.super.symmetricDifference(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -151,7 +149,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public Iterator<A> iterator() {
-        return map(Tuple2::_1, map).iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -164,7 +162,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public boolean equals(Object other) {
-        return other instanceof HashSet<?> && map.equals(((HashSet<?>) other).map);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -175,7 +173,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public int hashCode() {
-        return map.hashCode();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -184,7 +182,7 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @Override
     public String toString() {
-        return "HashSet[" + join(", ", map(into((e, __) -> e.toString()), map)) + ']';
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -198,10 +196,8 @@ public final class HashSet<A> implements Set<Natural, A> {
      * @return the {@link HashSet}
      */
     @SafeVarargs
-    public static <A> HashSet<A> hashSet(EquivalenceRelation<? super A> equivalenceRelation,
-                                         HashingAlgorithm<? super A> hashingAlgorithm,
-                                         A... as) {
-        return new HashSet<>(backingHashMap(hashMap(equivalenceRelation, hashingAlgorithm), as));
+    public static <A> HashSet<A> hashSet(EquivalenceRelation<? super A> equivalenceRelation, HashingAlgorithm<? super A> hashingAlgorithm, A... as) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -215,16 +211,11 @@ public final class HashSet<A> implements Set<Natural, A> {
      */
     @SafeVarargs
     public static <A> HashSet<A> hashSet(A... as) {
-        @SuppressWarnings("unchecked")
-        HashSet<A> emptyObjectDefaults = (HashSet<A>) EMPTY_OBJECT_DEFAULTS;
-        return as.length == 0
-               ? emptyObjectDefaults
-               : new HashSet<>(backingHashMap(hashMap(), as));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static <A> HashMap<A, Unit> backingHashMap(HashMap<A, Unit> hashMap, A[] as) {
-        for (A a : as)
-            hashMap = hashMap.put(a, UNIT);
+        for (A a : as) hashMap = hashMap.put(a, UNIT);
         return hashMap;
     }
 }

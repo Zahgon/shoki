@@ -9,10 +9,8 @@ import com.jnape.palatable.shoki.api.MultiSet;
 import com.jnape.palatable.shoki.api.Natural;
 import com.jnape.palatable.shoki.api.Natural.NonZero;
 import com.jnape.palatable.shoki.api.SizeInfo.Known;
-
 import java.util.Iterator;
 import java.util.Objects;
-
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Id.id;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Into.into;
@@ -49,7 +47,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashMultiSet<A> sum(MultiSet<A> other) {
-        return (HashMultiSet<A>) MultiSet.super.sum(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -58,7 +56,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashSet<A> unique() {
-        return multiplicityMap.keys();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -67,7 +65,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashMultiSet<A> inc(A a, NonZero k) {
-        return new HashMultiSet<>(multiplicityMap.put(a, multiplicityMap.get(a).fmap(k::plus).orElse(k)));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -76,12 +74,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashMultiSet<A> dec(A a, NonZero k) {
-        return multiplicityMap.get(a)
-                .fmap(n -> new HashMultiSet<>(n.minus(k).orElse(zero())
-                                                      .match(zero -> multiplicityMap.remove(a),
-                                                             difference -> multiplicityMap.put(a, difference))
-                ))
-                .orElse(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -90,7 +83,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public boolean isEmpty() {
-        return multiplicityMap.isEmpty();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -99,7 +92,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashMultiSet<A> remove(A a) {
-        return new HashMultiSet<>(multiplicityMap.remove(a));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -108,7 +101,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashMultiSet<A> inc(A a) {
-        return (HashMultiSet<A>) MultiSet.super.inc(a);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -117,7 +110,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashMultiSet<A> dec(A a) {
-        return (HashMultiSet<A>) MultiSet.super.dec(a);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -126,7 +119,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public Natural get(A a) {
-        return multiplicityMap.get(a).match(constantly(zero()), id());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -135,16 +128,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public Known<Natural> sizeInfo() {
-        Natural size = this.size;
-        if (size == null) {
-            synchronized (this) {
-                size = this.size;
-                if (size == null) {
-                    this.size = size = foldLeft(Natural::plus, (Natural) zero(), multiplicityMap.values());
-                }
-            }
-        }
-        return known(size);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -153,7 +137,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashMultiSet<A> tail() {
-        return new HashMultiSet<>(multiplicityMap.tail());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -162,7 +146,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public Maybe<Tuple2<A, NonZero>> head() {
-        return multiplicityMap.head();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -171,7 +155,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashMultiSet<A> intersection(MultiSet<A> other) {
-        return (HashMultiSet<A>) MultiSet.super.intersection(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -180,7 +164,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashMultiSet<A> union(MultiSet<A> other) {
-        return (HashMultiSet<A>) MultiSet.super.union(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -189,7 +173,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashMultiSet<A> difference(MultiSet<A> other) {
-        return (HashMultiSet<A>) MultiSet.super.difference(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -198,7 +182,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashMultiSet<A> symmetricDifference(MultiSet<A> other) {
-        return (HashMultiSet<A>) MultiSet.super.symmetricDifference(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -207,7 +191,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public HashMultiSet<A> merge(MultiSet<A> other, Semigroup<Natural> semigroup) {
-        return (HashMultiSet<A>) MultiSet.super.merge(other, semigroup);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -215,7 +199,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public Iterator<Tuple2<A, NonZero>> iterator() {
-        return multiplicityMap.iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -229,7 +213,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public boolean equals(Object other) {
-        return other instanceof HashMultiSet<?> && multiplicityMap.equals(((HashMultiSet<?>) other).multiplicityMap);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -240,7 +224,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public int hashCode() {
-        return multiplicityMap.hashCode();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -249,8 +233,7 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @Override
     public String toString() {
-        return "HashMultiSet["
-                + join(", ", map(into((a, k) -> format("(%s * %s)", a, k.bigIntegerValue())), this)) + "]";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -264,15 +247,12 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      * @return the {@link HashMultiSet}
      */
     @SafeVarargs
-    public static <A> HashMultiSet<A> hashMultiSet(EquivalenceRelation<? super A> equivalenceRelation,
-                                                   HashingAlgorithm<? super A> hashingAlgorithm,
-                                                   A... as) {
-        return hashMultiSet(new HashMultiSet<>(hashMap(equivalenceRelation, hashingAlgorithm)), as);
+    public static <A> HashMultiSet<A> hashMultiSet(EquivalenceRelation<? super A> equivalenceRelation, HashingAlgorithm<? super A> hashingAlgorithm, A... as) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static <A> HashMultiSet<A> hashMultiSet(HashMultiSet<A> hashMultiSet, A[] as) {
-        for (A a : as)
-            hashMultiSet = hashMultiSet.inc(a);
+        for (A a : as) hashMultiSet = hashMultiSet.inc(a);
         return hashMultiSet;
     }
 
@@ -287,8 +267,6 @@ public final class HashMultiSet<A> implements MultiSet<A> {
      */
     @SafeVarargs
     public static <A> HashMultiSet<A> hashMultiSet(A... as) {
-        @SuppressWarnings("unchecked")
-        HashMultiSet<A> emptyObjectDefaults = (HashMultiSet<A>) EMPTY_OBJECT_DEFAULTS;
-        return hashMultiSet(emptyObjectDefaults, as);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

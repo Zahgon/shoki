@@ -6,10 +6,8 @@ import com.jnape.palatable.shoki.api.Natural;
 import com.jnape.palatable.shoki.api.Queue;
 import com.jnape.palatable.shoki.api.SizeInfo.Known;
 import com.jnape.palatable.shoki.api.Stack;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 import static com.jnape.palatable.lambda.adt.Maybe.nothing;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Downcast.downcast;
 import static com.jnape.palatable.shoki.api.EquivalenceRelation.equivalent;
@@ -39,7 +37,7 @@ public abstract class StrictQueue<A> implements Queue<Natural, A>, Stack<Natural
      */
     @Override
     public StrictQueue<A> consAll(Collection<Natural, A> other) {
-        return (StrictQueue<A>) Stack.super.consAll(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -48,7 +46,7 @@ public abstract class StrictQueue<A> implements Queue<Natural, A>, Stack<Natural
      */
     @Override
     public StrictQueue<A> snocAll(Collection<Natural, A> collection) {
-        return (StrictQueue<A>) Queue.super.snocAll(collection);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -96,8 +94,7 @@ public abstract class StrictQueue<A> implements Queue<Natural, A>, Stack<Natural
      */
     @Override
     public boolean equals(Object other) {
-        return other instanceof StrictQueue<?> &&
-                equivalent(elementsInOrder(objectEquals()), this, downcast(other));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -116,16 +113,7 @@ public abstract class StrictQueue<A> implements Queue<Natural, A>, Stack<Natural
      */
     @Override
     public final String toString() {
-        StringBuilder toString = new StringBuilder("StrictQueue[");
-
-        Iterator<A> it = iterator();
-        while (it.hasNext()) {
-            toString.append(it.next());
-            if (it.hasNext())
-                toString.append(", ");
-        }
-
-        return toString.append("]").toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -138,14 +126,11 @@ public abstract class StrictQueue<A> implements Queue<Natural, A>, Stack<Natural
      */
     @SafeVarargs
     public static <A> StrictQueue<A> strictQueue(A... as) {
-        @SuppressWarnings("unchecked")
-        StrictQueue<A> empty = (StrictQueue<A>) Empty.INSTANCE;
-        return as.length == 0
-               ? empty
-               : new NonEmpty<>(strictStack(as), strictStack());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static final class Empty<A> extends StrictQueue<A> {
+
         private static final Empty<?> INSTANCE = new Empty<>();
 
         private Empty() {
@@ -153,55 +138,58 @@ public abstract class StrictQueue<A> implements Queue<Natural, A>, Stack<Natural
 
         @Override
         public StrictQueue<A> reverse() {
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public StrictQueue<A> snoc(A a) {
-            return cons(a);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public StrictQueue<A> tail() {
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public StrictQueue<A> cons(A a) {
-            return new NonEmpty<>(strictStack(a), strictStack());
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Maybe<A> head() {
-            return nothing();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Known<Natural> sizeInfo() {
-            return known(zero());
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean isEmpty() {
-            return true;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public int hashCode() {
-            return 0;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Iterator<A> iterator() {
-            return emptyIterator();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     private static final class NonEmpty<A> extends StrictQueue<A> {
+
         private final StrictStack<A> outgoing;
+
         private final StrictStack<A> incoming;
 
         private volatile Natural size;
+
         private volatile Integer hashCode;
 
         private NonEmpty(StrictStack<A> outgoing, StrictStack<A> incoming) {
@@ -211,92 +199,47 @@ public abstract class StrictQueue<A> implements Queue<Natural, A>, Stack<Natural
 
         @Override
         public StrictQueue<A> reverse() {
-            return incoming.isEmpty()
-                   ? new NonEmpty<>(outgoing.reverse(), incoming)
-                   : new NonEmpty<>(incoming, outgoing);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public StrictQueue<A> cons(A a) {
-            return new NonEmpty<>(outgoing.cons(a), incoming);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public StrictQueue<A> tail() {
-            StrictStack<A> outgoingTail = outgoing.tail();
-            if (!outgoingTail.isEmpty())
-                return new NonEmpty<>(outgoingTail, incoming);
-
-            return incoming.isEmpty()
-                   ? strictQueue()
-                   : new NonEmpty<>(incoming.reverse(), strictStack());
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public StrictQueue<A> snoc(A a) {
-            return new NonEmpty<>(outgoing, incoming.cons(a));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Maybe<A> head() {
-            return outgoing.head();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Known<Natural> sizeInfo() {
-            Natural size = this.size;
-            if (size == null) {
-                synchronized (this) {
-                    size = this.size;
-                    if (size == null) {
-                        this.size = size = outgoing.sizeInfo().getSize().plus(incoming.sizeInfo().getSize());
-                    }
-                }
-            }
-            return known(size);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean isEmpty() {
-            return false;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public int hashCode() {
-            Integer hashCode = this.hashCode;
-            if (hashCode == null) {
-                synchronized (this) {
-                    hashCode = this.hashCode;
-                    if (hashCode == null) {
-                        this.hashCode = hashCode = hash(arraysHashCode(), new StrictStack[]{outgoing, incoming});
-                    }
-                }
-            }
-            return hashCode;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Iterator<A> iterator() {
-            return new Iterator<A>() {
-                final Iterator<A> outgoing = NonEmpty.this.outgoing.iterator();
-                Iterator<A> incoming;
-
-                @Override
-                public boolean hasNext() {
-                    if (outgoing.hasNext())
-                        return true;
-                    if (incoming == null)
-                        incoming = NonEmpty.this.incoming.reverse().iterator();
-                    return incoming.hasNext();
-                }
-
-                @Override
-                public A next() {
-                    if (!hasNext())
-                        throw new NoSuchElementException();
-                    return outgoing.hasNext() ? outgoing.next() : incoming.next();
-                }
-            };
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

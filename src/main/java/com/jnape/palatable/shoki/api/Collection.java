@@ -31,6 +31,6 @@ public interface Collection<Size extends Number, A> extends Sequence<A>, Sizable
      */
     @Override
     default boolean isEmpty() {
-        return sizeInfo().getSize().intValue() == 0;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

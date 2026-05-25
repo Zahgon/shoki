@@ -2,7 +2,6 @@ package com.jnape.palatable.shoki.api;
 
 import com.jnape.palatable.lambda.functions.Fn1;
 import com.jnape.palatable.lambda.functor.Applicative;
-
 import java.util.Objects;
 
 /**
@@ -19,7 +18,7 @@ public interface HashingAlgorithm<A> extends Fn1<A, Integer> {
      */
     @Override
     default HashingAlgorithm<A> local(Fn1<? super A, ? extends A> fn) {
-        return Fn1.super.local(fn)::apply;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -27,7 +26,7 @@ public interface HashingAlgorithm<A> extends Fn1<A, Integer> {
      */
     @Override
     default HashingAlgorithm<A> censor(Fn1<? super A, ? extends A> fn) {
-        return Fn1.super.censor(fn)::apply;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -35,7 +34,7 @@ public interface HashingAlgorithm<A> extends Fn1<A, Integer> {
      */
     @Override
     default <C> HashingAlgorithm<A> discardR(Applicative<C, Fn1<A, ?>> appB) {
-        return Fn1.super.discardR(appB)::apply;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -43,7 +42,7 @@ public interface HashingAlgorithm<A> extends Fn1<A, Integer> {
      */
     @Override
     default <Z> HashingAlgorithm<Z> diMapL(Fn1<? super Z, ? extends A> fn) {
-        return Fn1.super.diMapL(fn)::apply;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -51,7 +50,7 @@ public interface HashingAlgorithm<A> extends Fn1<A, Integer> {
      */
     @Override
     default <Z> HashingAlgorithm<Z> contraMap(Fn1<? super Z, ? extends A> fn) {
-        return Fn1.super.contraMap(fn)::apply;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -61,7 +60,7 @@ public interface HashingAlgorithm<A> extends Fn1<A, Integer> {
      * @return a {@link HashingAlgorithm} implemented in terms of {@link Objects#hashCode(Object)}.
      */
     static <A> HashingAlgorithm<A> objectHashCode() {
-        return Objects::hashCode;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -71,9 +70,8 @@ public interface HashingAlgorithm<A> extends Fn1<A, Integer> {
      * @return a {@link HashingAlgorithm} implemented in terms of {@link System#identityHashCode(Object)}.
      */
     static <A> HashingAlgorithm<A> identityHashCode() {
-        return System::identityHashCode;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     /**
      * A {@link HashingAlgorithm} implemented in terms of {@link java.util.Arrays#hashCode(Object[])}.
@@ -82,7 +80,7 @@ public interface HashingAlgorithm<A> extends Fn1<A, Integer> {
      * @return a {@link HashingAlgorithm} implemented in terms of {@link java.util.Arrays#hashCode(Object[])}.
      */
     static <A> HashingAlgorithm<A[]> arraysHashCode() {
-        return java.util.Arrays::hashCode;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -91,7 +89,7 @@ public interface HashingAlgorithm<A> extends Fn1<A, Integer> {
      * @return a {@link HashingAlgorithm} implemented in terms of {@link java.util.Arrays#deepHashCode(Object[])}.
      */
     static HashingAlgorithm<Object[]> arraysDeepHashCode() {
-        return java.util.Arrays::deepHashCode;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -103,6 +101,6 @@ public interface HashingAlgorithm<A> extends Fn1<A, Integer> {
      * @return the hash
      */
     static <A> int hash(HashingAlgorithm<? super A> hashingAlgorithm, A a) {
-        return hashingAlgorithm.apply(a);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

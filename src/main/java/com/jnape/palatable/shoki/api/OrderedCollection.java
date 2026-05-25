@@ -31,6 +31,7 @@ public interface OrderedCollection<Size extends Number, A> extends Collection<Si
      * Common {@link EquivalenceRelation}s between {@link OrderedCollection}s.
      */
     final class EquivalenceRelations {
+
         private EquivalenceRelations() {
         }
 
@@ -44,10 +45,8 @@ public interface OrderedCollection<Size extends Number, A> extends Collection<Si
          * @param <OC>         the {@link OrderedCollection} subtype of the arguments
          * @return the {@link EquivalenceRelation}
          */
-        public static <A, OC extends OrderedCollection<?, A>> EquivalenceRelation<OC> elementsInOrder(
-                EquivalenceRelation<? super A> elementEqRel) {
-            EquivalenceRelation<OC> elementsInOrder = (xs, ys) -> and().reduceLeft(zipWith(elementEqRel, xs, ys));
-            return Sizable.EquivalenceRelations.<OC>sizeInfos().and(elementsInOrder);
+        public static <A, OC extends OrderedCollection<?, A>> EquivalenceRelation<OC> elementsInOrder(EquivalenceRelation<? super A> elementEqRel) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -55,6 +54,7 @@ public interface OrderedCollection<Size extends Number, A> extends Collection<Si
      * Common {@link HashingAlgorithm}s between {@link OrderedCollection}s.
      */
     final class HashingAlgorithms {
+
         private HashingAlgorithms() {
         }
 
@@ -67,9 +67,8 @@ public interface OrderedCollection<Size extends Number, A> extends Collection<Si
          * @param <OC>           the {@link OrderedCollection} subtype of the argument
          * @return the {@link HashingAlgorithm}
          */
-        public static <A, OC extends OrderedCollection<?, A>> HashingAlgorithm<OC> elementsInOrder(
-                HashingAlgorithm<? super A> elementHashAlg) {
-            return xs -> foldLeft((hash, x) -> (hash * 31) + elementHashAlg.apply(x), 0, xs);
+        public static <A, OC extends OrderedCollection<?, A>> HashingAlgorithm<OC> elementsInOrder(HashingAlgorithm<? super A> elementHashAlg) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

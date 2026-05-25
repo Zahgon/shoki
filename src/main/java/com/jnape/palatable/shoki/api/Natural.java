@@ -4,10 +4,8 @@ import com.jnape.palatable.lambda.adt.Maybe;
 import com.jnape.palatable.lambda.adt.Try;
 import com.jnape.palatable.lambda.adt.coproduct.CoProduct2;
 import com.jnape.palatable.lambda.functions.Fn1;
-
 import java.math.BigInteger;
 import java.util.Objects;
-
 import static com.jnape.palatable.lambda.adt.Maybe.just;
 import static com.jnape.palatable.lambda.adt.Maybe.nothing;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
@@ -25,8 +23,7 @@ import static java.math.BigInteger.ZERO;
  * integers - with type-safe interfaces for dealing with the {@link CoProduct2 coproduct} of {@link Zero zero} and
  * {@link NonZero non-zero} values.
  */
-public abstract class Natural extends Number
-        implements CoProduct2<Natural.Zero, Natural.NonZero, Natural>, Comparable<Natural> {
+public abstract class Natural extends Number implements CoProduct2<Natural.Zero, Natural.NonZero, Natural>, Comparable<Natural> {
 
     private Natural() {
     }
@@ -87,7 +84,7 @@ public abstract class Natural extends Number
      * @return {@link Maybe} the {@link Natural} difference
      */
     public final Maybe<Natural> minus(Natural subtrahend) {
-        return subtrahend.match(constantly(just(this)), this::minus);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -98,7 +95,7 @@ public abstract class Natural extends Number
      */
     @SuppressWarnings("unused")
     public final Zero times(Zero multiplier) {
-        return zero();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -107,7 +104,7 @@ public abstract class Natural extends Number
      * @return the incremented {@link NonZero non-zero} {@link Natural}
      */
     public final NonZero inc() {
-        return plus(one());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -116,7 +113,7 @@ public abstract class Natural extends Number
      * @return {@link Maybe} the decremented {@link Natural}
      */
     public final Maybe<Natural> dec() {
-        return minus(one());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -142,7 +139,7 @@ public abstract class Natural extends Number
      */
     @Override
     public final float floatValue() {
-        return intValue();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -152,7 +149,7 @@ public abstract class Natural extends Number
      */
     @Override
     public final double doubleValue() {
-        return longValue();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -160,7 +157,7 @@ public abstract class Natural extends Number
      */
     @Override
     public int compareTo(Natural other) {
-        return bigIntegerValue().compareTo(other.bigIntegerValue());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected abstract Maybe<Natural> minus(NonZero subtrahend);
@@ -171,7 +168,7 @@ public abstract class Natural extends Number
      * @return the singleton {@link Zero}
      */
     public static Zero zero() {
-        return Zero.INSTANCE;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -180,7 +177,7 @@ public abstract class Natural extends Number
      * @return the {@link NonZero non-zero} value of 1
      */
     public static NonZero one() {
-        return NonZero.I.ONE;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -191,7 +188,7 @@ public abstract class Natural extends Number
      * @return {@link Maybe} the corresponding {@link Natural}
      */
     public static Maybe<Natural> natural(int value) {
-        return natural(value, 0);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -202,7 +199,7 @@ public abstract class Natural extends Number
      * @see Natural#natural(int)
      */
     public static Maybe<Natural> natural(long value) {
-        return natural(value, 0L);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -213,7 +210,7 @@ public abstract class Natural extends Number
      * @see Natural#natural(int)
      */
     public static Maybe<Natural> natural(BigInteger value) {
-        return natural(value, ZERO);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -225,7 +222,7 @@ public abstract class Natural extends Number
      * @return the {@link Natural} corresponding to the value's absolute value
      */
     public static Natural abs(int value) {
-        return abs(value, 0, i -> -i);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -236,7 +233,7 @@ public abstract class Natural extends Number
      * @see Natural#abs(int)
      */
     public static Natural abs(long value) {
-        return abs(value, 0L, l -> -l);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -247,7 +244,7 @@ public abstract class Natural extends Number
      * @see Natural#abs(int)
      */
     public static Natural abs(BigInteger value) {
-        return abs(value, ZERO, BigInteger::negate);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -258,7 +255,7 @@ public abstract class Natural extends Number
      * @return the {@link Natural} corresponding to the given value, or {@link Zero}
      */
     public static Natural atLeastZero(int value) {
-        return atLeastZero(value, 0);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -269,7 +266,7 @@ public abstract class Natural extends Number
      * @see Natural#atLeastZero(int)
      */
     public static Natural atLeastZero(long value) {
-        return atLeastZero(value, 0L);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -280,7 +277,7 @@ public abstract class Natural extends Number
      * @see Natural#atLeastZero(int)
      */
     public static Natural atLeastZero(BigInteger value) {
-        return atLeastZero(value, ZERO);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -291,7 +288,7 @@ public abstract class Natural extends Number
      * @return the {@link NonZero non-zero} {@link Natural} corresponding to the given value, or {@link Natural#one()}
      */
     public static NonZero atLeastOne(int value) {
-        return atLeastOne(value, 0);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -302,7 +299,7 @@ public abstract class Natural extends Number
      * @see Natural#atLeastOne(int)
      */
     public static NonZero atLeastOne(long value) {
-        return atLeastOne(value, 0L);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -313,7 +310,7 @@ public abstract class Natural extends Number
      * @see Natural#atLeastOne(int)
      */
     public static NonZero atLeastOne(BigInteger value) {
-        return atLeastOne(value, ZERO);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static <N extends Number & Comparable<N>> Maybe<Natural> natural(N value, N zero) {
@@ -339,6 +336,7 @@ public abstract class Natural extends Number
      * @see NonZero
      */
     public static final class Zero extends Natural {
+
         private static final Zero INSTANCE = new Zero();
 
         private Zero() {
@@ -351,67 +349,67 @@ public abstract class Natural extends Number
          * @return {@link Zero}
          */
         public Zero plus(@SuppressWarnings("unused") Zero addend) {
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public NonZero plus(NonZero addend) {
-            return addend;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Natural plus(Natural addend) {
-            return addend;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Zero minus(Zero subtrahend) {
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Maybe<Natural> minus(NonZero subtrahend) {
-            return nothing();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Zero times(Natural multiplier) {
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Zero modulo(NonZero divisor) {
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public BigInteger bigIntegerValue() {
-            return ZERO;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public int intValue() {
-            return 0;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public long longValue() {
-            return 0L;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public <R> R match(Fn1<? super Zero, ? extends R> aFn, Fn1<? super NonZero, ? extends R> bFn) {
-            return aFn.apply(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public int hashCode() {
-            return 0;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String toString() {
-            return "Zero{}";
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -427,7 +425,7 @@ public abstract class Natural extends Number
         }
 
         public final NonZero times(NonZero multiplier) {
-            return nonZero(bigIntegerValue().multiply(multiplier.bigIntegerValue()));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         abstract Number value();
@@ -437,43 +435,42 @@ public abstract class Natural extends Number
 
         @Override
         public final NonZero plus(NonZero addend) {
-            return plus((Natural) addend);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public NonZero minus(Zero subtrahend) {
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Natural times(Natural multiplier) {
-            return multiplier instanceof Zero ? zero() : times((NonZero) multiplier);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public final Natural modulo(NonZero divisor) {
-            return atLeastZero(bigIntegerValue().mod(divisor.bigIntegerValue()));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public <R> R match(Fn1<? super Zero, ? extends R> aFn, Fn1<? super NonZero, ? extends R> bFn) {
-            return bFn.apply(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean equals(Object other) {
-            return other instanceof NonZero
-                    && equivalent(objectEquals(), bigIntegerValue(), ((NonZero) other).bigIntegerValue());
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public int hashCode() {
-            return Objects.hashCode(value());
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String toString() {
-            return "NonZero{value=" + value() + '}';
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         private static NonZero nonZero(Number n) {
@@ -484,13 +481,12 @@ public abstract class Natural extends Number
                 return nLong <= Integer.MAX_VALUE ? new I((int) nLong) : new L(nLong);
             } else {
                 BigInteger nBigInteger = (BigInteger) n;
-                return Try.<NonZero>trying(() -> new NonZero.I(nBigInteger.intValueExact()))
-                        .catchError(__ -> Try.trying(() -> new NonZero.L(nBigInteger.longValueExact())))
-                        .recover(__ -> new NonZero.B(nBigInteger));
+                return Try.<NonZero>trying(() -> new NonZero.I(nBigInteger.intValueExact())).catchError(__ -> Try.trying(() -> new NonZero.L(nBigInteger.longValueExact()))).recover(__ -> new NonZero.B(nBigInteger));
             }
         }
 
         static final class I extends NonZero {
+
             private static final I ONE = new I(1);
 
             private final int value;
@@ -501,50 +497,42 @@ public abstract class Natural extends Number
 
             @Override
             public NonZero plus(Natural addend) {
-                int intSum = value + addend.intValue();
-                if (intSum > 0)
-                    return new I(intSum);
-
-                long longSum = value + addend.longValue();
-                if (longSum > 0)
-                    return new L(longSum);
-
-                return new B(bigIntegerValue().add(addend.bigIntegerValue()));
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public Maybe<Natural> minus(NonZero subtrahend) {
-                return subtrahend instanceof I ? natural(value - ((I) subtrahend).value()) : nothing();
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public BigInteger bigIntegerValue() {
-                return BigInteger.valueOf(value);
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public byte byteValue() {
-                return (byte) min(Byte.MAX_VALUE, value);
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public short shortValue() {
-                return (short) min(Short.MAX_VALUE, value);
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public int intValue() {
-                return value;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public long longValue() {
-                return value;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             Integer value() {
-                return value;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
         }
 
@@ -558,48 +546,42 @@ public abstract class Natural extends Number
 
             @Override
             public NonZero plus(Natural addend) {
-                long longSum = value + addend.longValue();
-                if (longSum > 0)
-                    return new L(longSum);
-
-                return new B(bigIntegerValue().add(addend.bigIntegerValue()));
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public Maybe<Natural> minus(NonZero subtrahend) {
-                return subtrahend instanceof I || subtrahend instanceof L
-                       ? natural(value - subtrahend.longValue())
-                       : nothing();
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public BigInteger bigIntegerValue() {
-                return BigInteger.valueOf(value);
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public byte byteValue() {
-                return Byte.MAX_VALUE;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public short shortValue() {
-                return Short.MAX_VALUE;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public int intValue() {
-                return Integer.MAX_VALUE;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public long longValue() {
-                return value;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             Long value() {
-                return value;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
         }
 
@@ -613,42 +595,42 @@ public abstract class Natural extends Number
 
             @Override
             public NonZero.B plus(Natural addend) {
-                return new B(value.add(addend.bigIntegerValue()));
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public Maybe<Natural> minus(NonZero subtrahend) {
-                return natural(value.subtract(subtrahend.bigIntegerValue()));
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public BigInteger bigIntegerValue() {
-                return value;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public byte byteValue() {
-                return Byte.MAX_VALUE;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public short shortValue() {
-                return Short.MAX_VALUE;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public int intValue() {
-                return Integer.MAX_VALUE;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public long longValue() {
-                return Long.MAX_VALUE;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             BigInteger value() {
-                return value;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
         }
     }
